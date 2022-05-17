@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/tecnologia")
@@ -48,7 +49,7 @@ public class TecnologiaController {
     }
 
     @GetMapping("/proyectos/{id}")
-    public ResponseEntity<List<Proyecto>> getProyectos(@PathVariable Integer id){
+    public ResponseEntity<Set<Proyecto>> getProyectos(@PathVariable Integer id){
         return tecnologiaService.getProyectos(id);
     }
 }

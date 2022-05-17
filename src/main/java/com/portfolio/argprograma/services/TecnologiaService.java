@@ -18,6 +18,7 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -73,11 +74,11 @@ public class TecnologiaService {
         return ResponseEntity.ok(tecnologiaOptional.get());
     }
 
-    public ResponseEntity<List<Proyecto>> getProyectos(Integer id){
+    public ResponseEntity<Set<Proyecto>> getProyectos(Integer id){
         Tecnologia tecnologia = tecnologiaRepository.findById(id).orElseThrow();
 
         if (tecnologia != null){
-            return new ResponseEntity<>(tecnologia.getListaDeProyectos(), HttpStatus.OK);
+            return new ResponseEntity<>(tecnologia.getProyectos(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

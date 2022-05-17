@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -46,11 +47,11 @@ public class ProyectoService {
         return proyectoRepository.findById(id);
     }
 
-    public ResponseEntity<List<Tecnologia>> getTecnologias(Integer id){
+    public ResponseEntity<Set<Tecnologia>> getTecnologias(Integer id){
         Proyecto proyecto = proyectoRepository.findById(id).orElseThrow();
 
         if (proyecto != null){
-            return new ResponseEntity<>(proyecto.getListaDeTecnologias(), HttpStatus.OK);
+            return new ResponseEntity<>(proyecto.getTecnologias(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

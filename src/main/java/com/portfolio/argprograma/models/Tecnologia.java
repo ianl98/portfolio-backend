@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -20,5 +22,5 @@ public class Tecnologia {
     @JoinTable(name = "proyectos_tecnologias",
             joinColumns = @JoinColumn(name = "tecnologia_id", referencedColumnName = "tecnologia_id"),
             inverseJoinColumns = @JoinColumn(name = "proyecto_id", referencedColumnName = "proyecto_id"))
-    private List<Proyecto> listaDeProyectos;
+    private Set<Proyecto> proyectos = new HashSet<>();
 }
