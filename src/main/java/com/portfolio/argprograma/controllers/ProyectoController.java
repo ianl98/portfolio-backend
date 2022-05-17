@@ -1,8 +1,10 @@
 package com.portfolio.argprograma.controllers;
 
 import com.portfolio.argprograma.models.Proyecto;
+import com.portfolio.argprograma.models.Tecnologia;
 import com.portfolio.argprograma.services.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +46,10 @@ public class ProyectoController {
     @GetMapping("/{id}")
     public Optional<Proyecto> getOneProyecto(@PathVariable Integer id) {
         return proyectoService.getOneProyecto(id);
+    }
+
+    @GetMapping("tecnologias/{id}")
+    public ResponseEntity<List<Tecnologia>> getTecnologias(Integer id){
+        return proyectoService.getTecnologias(id);
     }
 }
