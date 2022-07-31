@@ -1,5 +1,6 @@
 package com.portfolio.argprograma.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,8 @@ public class ExperienciaLaboral {
 
     private String empresa;
     private String cargo;
+    private String logo;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date inicio;
     private String fin;
 }

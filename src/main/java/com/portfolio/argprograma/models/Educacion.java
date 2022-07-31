@@ -1,5 +1,6 @@
 package com.portfolio.argprograma.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,8 @@ public class Educacion {
     private String institucion;
     private String carrera;
     private String foto;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date inicio;
-    private String fin;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Date fin;
 }

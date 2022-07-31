@@ -1,23 +1,22 @@
 package com.portfolio.argprograma.controllers;
 
 import com.portfolio.argprograma.models.Proyecto;
-import com.portfolio.argprograma.models.Tecnologia;
 import com.portfolio.argprograma.services.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping("api/proyecto")
+@CrossOrigin
 public class ProyectoController {
 
     @Autowired
     ProyectoService proyectoService;
-
 
     @GetMapping("/all")
     public List<Proyecto> getProyectos(){
@@ -25,11 +24,9 @@ public class ProyectoController {
     }
 
     @PostMapping("/save")
-    public String saveProyecto(@RequestBody Proyecto proyecto){
+    public void saveProyecto(@RequestBody Proyecto proyecto){
 
         proyectoService.saveProyecto(proyecto);
-
-        return "se ha guardado satisfactoriamente";
 
     }
 
@@ -39,6 +36,7 @@ public class ProyectoController {
         proyectoService.updateProyecto(id, proyecto);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deleteProyecto(@PathVariable Integer id){
         proyectoService.deleteProyecto(id);
@@ -49,8 +47,4 @@ public class ProyectoController {
         return proyectoService.getOneProyecto(id);
     }
 
-    @GetMapping("tecnologias/{id}")
-    public ResponseEntity<Set<Tecnologia>> getTecnologias(@PathVariable Integer id){
-        return proyectoService.getTecnologias(id);
-    }
 }

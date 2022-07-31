@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +40,18 @@ public class ExperienciaLaboralService {
     }
 
     public void deleteExperienciaLaboral(int id) {
+        Optional <ExperienciaLaboral> experienciaLaboralOptional = experienciaLaboralRepository.findById(id);
+
+        Path directorioImagenes = Paths.get("src//main//resources//static/expLaboral");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+
+        try {
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + experienciaLaboralOptional.get().getLogo());
+            Files.delete(rutaCompleta);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         experienciaLaboralRepository.deleteById(id);
     }
 

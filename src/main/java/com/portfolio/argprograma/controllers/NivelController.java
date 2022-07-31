@@ -3,6 +3,7 @@ package com.portfolio.argprograma.controllers;
 import com.portfolio.argprograma.models.Nivel;
 import com.portfolio.argprograma.services.NivelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/nivel")
+@CrossOrigin
 public class NivelController {
 
     @Autowired
@@ -35,6 +37,7 @@ public class NivelController {
         nivelService.updateNivel(id, nivel);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deleteNivel(@PathVariable Integer id){
         nivelService.deleteNivel(id);

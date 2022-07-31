@@ -19,6 +19,7 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String sobreMi;
-    private String email;
+    private String localidad;
+    private String titulo;
     private String fotoPerfil;
 }

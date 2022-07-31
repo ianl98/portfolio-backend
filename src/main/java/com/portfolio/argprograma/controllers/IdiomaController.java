@@ -3,6 +3,7 @@ package com.portfolio.argprograma.controllers;
 import com.portfolio.argprograma.models.Idioma;
 import com.portfolio.argprograma.services.IdiomaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/idioma")
+@CrossOrigin
 public class IdiomaController {
 
     @Autowired
@@ -21,11 +23,10 @@ public class IdiomaController {
     }
 
     @PostMapping("/save")
-    public String saveIdioma(@RequestBody Idioma idioma){
+    public void saveIdioma(@RequestBody Idioma idioma){
 
         idiomaService.saveIdioma(idioma);
 
-        return "se ha guardado satisfactoriamente";
 
     }
 
@@ -35,6 +36,7 @@ public class IdiomaController {
         idiomaService.updateIdioma(id, idioma);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deleteIdioma(@PathVariable Integer id){
         idiomaService.deleteIdioma(id);

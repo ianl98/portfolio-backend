@@ -3,6 +3,7 @@ package com.portfolio.argprograma.controllers;
 import com.portfolio.argprograma.models.Habilidad;
 import com.portfolio.argprograma.services.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/habilidad")
+@CrossOrigin
 public class HabilidadController {
 
     @Autowired
@@ -21,11 +23,9 @@ public class HabilidadController {
     }
 
     @PostMapping("/save")
-    public String saveHabilidad(@RequestBody Habilidad habilidad){
+    public void saveHabilidad(@RequestBody Habilidad habilidad){
 
         habilidadService.saveHabilidad(habilidad);
-
-        return "se ha guardado satisfactoriamente";
 
     }
 
@@ -35,6 +35,7 @@ public class HabilidadController {
         habilidadService.updateHabilidad(id, habilidad);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public void deleteHabilidad(@PathVariable Integer id){
         habilidadService.deleteHabilidad(id);
