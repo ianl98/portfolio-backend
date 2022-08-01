@@ -14,7 +14,7 @@
 	<name>argprograma</name>
 	<description>Backend del proyecto final del curso Argentina programa</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
